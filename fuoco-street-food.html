@@ -1,0 +1,696 @@
+<!-- ⚠️ PREVIEW VERSION — NOT FOR COMMERCIAL USE
+     Full version: [your gumroad link]
+     © Vinayak Ganiger — vinayakganiger445@gmail.com
+-->
+<!--
+  ════════════════════════════════════════════════════
+  FUOCO – Italian Street Food Website Template
+  ════════════════════════════════════════════════════
+  Designed & Built by : Vinayak Ganiger
+  Co-created with     : Claude (Anthropic AI)
+  📧 vinayakganiger445@gmail.com
+  💬 https://wa.me/4916364141​97
+  ════════════════════════════════════════════════════
+-->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FUOCO – Pizza & Street Food Roma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;0,800;0,900;1,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream:   #F8F4EE;
+      --red:     #D62828;
+      --red-dark:#A81F1F;
+      --green:   #2D6A4F;
+      --yellow:  #F4A261;
+      --black:   #1A1A1A;
+      --gray:    #4A4A4A;
+      --light:   #EDEBE6;
+      --bg:      var(--cream);
+      --text:    var(--black);
+      --surface: #FFFFFF;
+      --border:  #E0DBD3;
+      --font-head:'Barlow Condensed',sans-serif;
+      --font-body:'DM Sans',sans-serif;
+      --radius:  4px;
+      --shadow:  0 4px 24px rgba(0,0,0,0.10);
+      --transition:0.3s ease;
+    }
+    body.dark-mode {
+      --bg:      #111111;
+      --text:    #F0ECE4;
+      --surface: #1E1E1E;
+      --border:  #333333;
+      --light:   #222222;
+      --cream:   #111111;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font-body);background:var(--bg);color:var(--text);transition:background var(--transition),color var(--transition);overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+    ul{list-style:none;}
+    button{cursor:pointer;border:none;background:none;font-family:inherit;}
+
+    /* ── LOADER ── */
+    #loader{position:fixed;inset:0;z-index:9999;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;transition:opacity 0.6s ease,visibility 0.6s ease;}
+    #loader.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+    .loader-pizza{font-size:5rem;animation:spin 2s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    .loader-text{font-family:var(--font-head);font-size:3.5rem;font-weight:900;color:#fff;letter-spacing:6px;animation:pulse 1s ease-in-out infinite alternate;}
+    .loader-text span{color:var(--red);}
+    @keyframes pulse{from{opacity:0.7;}to{opacity:1;}}
+
+    /* ── NAVBAR ── */
+    #navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2rem;height:70px;display:flex;align-items:center;justify-content:space-between;transition:background var(--transition),box-shadow var(--transition);}
+    #navbar.scrolled{background:var(--bg);box-shadow:0 2px 20px rgba(0,0,0,0.12);}
+    .nav-logo{font-family:var(--font-head);font-size:2.2rem;font-weight:900;letter-spacing:3px;color:var(--red);}
+    .nav-logo span{color:var(--yellow);}
+    .nav-links{display:flex;align-items:center;gap:2rem;}
+    .nav-links a{font-family:var(--font-head);font-size:1.05rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text);transition:color var(--transition);position:relative;}
+    .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transition:transform var(--transition);}
+    .nav-links a:hover{color:var(--red);}
+    .nav-links a:hover::after{transform:scaleX(1);}
+    .nav-right{display:flex;align-items:center;gap:0.8rem;}
+    .lang-switcher{display:flex;border:2px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+    .lang-btn{padding:5px 10px;font-family:var(--font-head);font-size:0.85rem;font-weight:700;letter-spacing:1px;color:var(--gray);background:transparent;border:none;border-right:1px solid var(--border);cursor:pointer;transition:all var(--transition);}
+    .lang-btn:last-child{border-right:none;}
+    .lang-btn.active{background:var(--red);color:#fff;}
+    .lang-btn:hover:not(.active){background:var(--light);color:var(--red);}
+    .dark-toggle{width:40px;height:40px;border-radius:50%;background:var(--light);display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:background var(--transition);}
+    .dark-toggle:hover{background:var(--border);}
+    .nav-order-btn{padding:9px 20px;background:var(--red);color:#fff;font-family:var(--font-head);font-size:1rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;border-radius:var(--radius);transition:all var(--transition);}
+    .nav-order-btn:hover{background:var(--red-dark);transform:scale(1.03);}
+    .nav-hamburger{display:none;flex-direction:column;gap:5px;width:30px;cursor:pointer;}
+    .nav-hamburger span{display:block;height:3px;background:var(--text);border-radius:2px;transition:all var(--transition);}
+    .mobile-nav{display:none;position:fixed;top:70px;left:0;right:0;z-index:999;background:var(--bg);padding:1.5rem 2rem;flex-direction:column;gap:1rem;box-shadow:0 10px 30px rgba(0,0,0,0.15);border-top:3px solid var(--red);}
+    .mobile-nav.open{display:flex;}
+    .mobile-nav a{font-family:var(--font-head);font-size:1.4rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--text);padding:0.5rem 0;border-bottom:1px solid var(--border);transition:color var(--transition);}
+    .mobile-nav a:hover{color:var(--red);}
+
+    /* ── HERO ── */
+    #hero{min-height:100vh;background:var(--black);position:relative;display:flex;align-items:center;overflow:hidden;}
+    .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(214,40,40,0.22) 0%,transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(244,162,97,0.12) 0%,transparent 50%);}
+    .hero-stripes{position:absolute;inset:0;opacity:0.04;background:repeating-linear-gradient(-45deg,#ffffff 0px,#ffffff 2px,transparent 2px,transparent 24px);}
+    .hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 2rem;padding-top:100px;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:4rem;}
+    .hero-badge{display:inline-block;background:var(--red);color:#fff;font-family:var(--font-head);font-size:0.85rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;padding:6px 16px;border-radius:2px;margin-bottom:1rem;animation:slideLeft 0.8s ease 0.3s both;}
+    .hero-h1{font-family:var(--font-head);font-size:clamp(4rem,9vw,8rem);font-weight:900;line-height:0.9;color:#fff;text-transform:uppercase;letter-spacing:-2px;margin-bottom:1rem;animation:slideLeft 0.8s ease 0.5s both;}
+    .hero-h1 .r{color:var(--red);}
+    .hero-h1 .y{color:var(--yellow);}
+    .hero-h1 .g{color:#4CAF50;}
+    .hero-sub{font-size:1.05rem;color:rgba(255,255,255,0.7);line-height:1.7;max-width:420px;margin-bottom:2rem;animation:slideLeft 0.8s ease 0.7s both;}
+    .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;animation:slideLeft 0.8s ease 0.9s both;}
+    .btn-primary{padding:15px 34px;background:var(--red);color:#fff;font-family:var(--font-head);font-size:1.1rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;border-radius:var(--radius);transition:all var(--transition);display:inline-flex;align-items:center;gap:8px;}
+    .btn-primary:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(214,40,40,0.4);}
+    .btn-outline{padding:15px 34px;border:2px solid rgba(255,255,255,0.4);color:#fff;font-family:var(--font-head);font-size:1.1rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;border-radius:var(--radius);transition:all var(--transition);}
+    .btn-outline:hover{border-color:var(--yellow);color:var(--yellow);}
+    .hero-visual{display:flex;align-items:center;justify-content:center;animation:slideRight 0.8s ease 0.6s both;}
+    .hero-plate{width:340px;height:340px;background:radial-gradient(circle at 40% 40%,#3a3a3a,#1a1a1a);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.6);}
+    .hero-plate::before{content:'';position:absolute;inset:-8px;border-radius:50%;border:2px dashed rgba(244,162,97,0.3);animation:spin 20s linear infinite;}
+    .big-icon{font-size:9rem;animation:float 3s ease-in-out infinite;filter:drop-shadow(0 10px 30px rgba(214,40,40,0.3));}
+    @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-15px);}}
+    .hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,0.4);font-family:var(--font-head);font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;}
+    .scroll-line{width:1px;height:38px;background:linear-gradient(to bottom,rgba(255,255,255,0.4),transparent);}
+    @keyframes slideLeft{from{transform:translateX(-40px);opacity:0;}to{transform:translateX(0);opacity:1;}}
+    @keyframes slideRight{from{transform:translateX(40px);opacity:0;}to{transform:translateX(0);opacity:1;}}
+
+    /* ── STATS ── */
+    #stats{background:var(--red);padding:1.5rem 2rem;}
+    .stats-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
+    .stat-item{text-align:center;padding:0.5rem 1rem;border-right:1px solid rgba(255,255,255,0.25);}
+    .stat-item:last-child{border-right:none;}
+    .stat-num{font-family:var(--font-head);font-size:2.5rem;font-weight:900;color:#fff;display:block;}
+    .stat-label{font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.8);letter-spacing:1px;text-transform:uppercase;}
+
+    /* ── SECTIONS ── */
+    section{padding:6rem 2rem;}
+    .section-inner{max-width:1200px;margin:0 auto;}
+    .section-tag{font-family:var(--font-head);font-size:0.85rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:0.5rem;display:block;}
+    .section-title{font-family:var(--font-head);font-size:clamp(2.5rem,5vw,4rem);font-weight:900;text-transform:uppercase;line-height:1;letter-spacing:-1px;color:var(--text);margin-bottom:1rem;}
+    .section-sub{font-size:1rem;color:var(--gray);line-height:1.7;max-width:560px;}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+
+    /* ── ABOUT ── */
+    #about{background:var(--surface);}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+    .about-img{height:460px;background:var(--light);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:10rem;position:relative;overflow:hidden;}
+    .about-img::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--red),var(--green),var(--red));}
+    .about-badge{position:absolute;bottom:-16px;right:-16px;width:110px;height:110px;background:var(--green);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-family:var(--font-head);text-align:center;box-shadow:0 8px 30px rgba(45,106,79,0.4);}
+    .about-badge .big{font-size:1.8rem;font-weight:900;line-height:1;}
+    .about-badge .small{font-size:0.65rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;}
+    .about-features{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2rem;}
+    .about-feature{display:flex;gap:0.8rem;align-items:flex-start;}
+    .feat-icon{font-size:1.4rem;flex-shrink:0;width:42px;height:42px;background:rgba(214,40,40,0.1);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;}
+    .feat-text h4{font-family:var(--font-head);font-size:0.95rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text);margin-bottom:2px;}
+    .feat-text p{font-size:0.83rem;color:var(--gray);line-height:1.5;}
+
+    /* ── MENU ── */
+    #menu{background:var(--bg);}
+    .menu-tabs{display:flex;gap:0;flex-wrap:wrap;border-bottom:3px solid var(--border);margin:2.5rem 0 2rem;}
+    .menu-tab{padding:12px 26px;font-family:var(--font-head);font-size:1rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gray);border-bottom:3px solid transparent;margin-bottom:-3px;transition:all var(--transition);}
+    .menu-tab.active{color:var(--red);border-bottom-color:var(--red);}
+    .menu-tab:hover:not(.active){color:var(--text);}
+    .menu-panel{display:none;}
+    .menu-panel.active{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.5rem;}
+    .menu-card{background:var(--surface);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);transition:transform var(--transition),box-shadow var(--transition);position:relative;}
+    .menu-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
+    .menu-card-img{height:130px;background:var(--light);display:flex;align-items:center;justify-content:center;font-size:3.8rem;position:relative;}
+    .menu-bestseller{position:absolute;top:8px;left:8px;background:var(--yellow);color:var(--black);font-family:var(--font-head);font-size:0.7rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:2px;}
+    .menu-card-body{padding:1rem 1.2rem 1.2rem;}
+    .menu-card-name{font-family:var(--font-head);font-size:1.25rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text);margin-bottom:4px;}
+    .menu-card-desc{font-size:0.83rem;color:var(--gray);line-height:1.5;margin-bottom:0.8rem;}
+    .menu-card-footer{display:flex;justify-content:space-between;align-items:center;}
+    .menu-price{font-family:var(--font-head);font-size:1.35rem;font-weight:900;color:var(--red);}
+    .menu-add{width:32px;height:32px;background:var(--red);color:#fff;border-radius:50%;font-size:1.1rem;font-weight:700;display:flex;align-items:center;justify-content:center;transition:all var(--transition);}
+    .menu-add:hover{background:var(--red-dark);transform:scale(1.1);}
+
+    /* ── DEAL ── */
+    #deal{background:var(--black);padding:5rem 2rem;overflow:hidden;position:relative;}
+    .deal-bg-text{position:absolute;font-family:var(--font-head);font-size:14rem;font-weight:900;text-transform:uppercase;color:rgba(255,255,255,0.03);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;}
+    .deal-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;position:relative;z-index:1;}
+    .deal-tag{font-family:var(--font-head);font-size:0.85rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--yellow);margin-bottom:0.8rem;display:block;}
+    .deal-title{font-family:var(--font-head);font-size:clamp(3rem,6vw,5rem);font-weight:900;text-transform:uppercase;line-height:0.95;color:#fff;margin-bottom:1rem;}
+    .deal-title em{color:var(--red);font-style:normal;}
+    .deal-desc{color:rgba(255,255,255,0.55);font-size:1rem;line-height:1.7;margin-bottom:2rem;}
+    .deal-btn{padding:14px 36px;background:var(--yellow);color:var(--black);font-family:var(--font-head);font-size:1.1rem;font-weight:900;letter-spacing:2px;text-transform:uppercase;border-radius:var(--radius);transition:all var(--transition);display:inline-block;}
+    .deal-btn:hover{background:#e09050;transform:translateY(-2px);}
+    .deal-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+    .deal-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:1.5rem;text-align:center;transition:border-color var(--transition);}
+    .deal-card:hover{border-color:var(--red);}
+    .deal-card-icon{font-size:2.5rem;margin-bottom:0.5rem;}
+    .deal-card-name{font-family:var(--font-head);font-size:1rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#fff;margin-bottom:4px;}
+    .deal-card-price{font-family:var(--font-head);font-size:1.5rem;font-weight:900;color:var(--yellow);}
+    .deal-card-old{font-size:0.82rem;color:rgba(255,255,255,0.35);text-decoration:line-through;}
+
+    /* ── GALLERY ── */
+    #gallery{background:var(--surface);}
+    .gallery-grid{display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(2,200px);gap:10px;margin-top:2rem;}
+    .gallery-item{background:var(--light);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:3.5rem;overflow:hidden;position:relative;transition:transform var(--transition);}
+    .gallery-item:hover{transform:scale(1.02);}
+    .gallery-item:nth-child(1){grid-column:span 2;grid-row:span 2;font-size:7rem;}
+    .gallery-item:nth-child(2){grid-column:span 2;}
+    .gallery-item:nth-child(3){grid-column:span 2;}
+    .gallery-item::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(214,40,40,0.08),transparent);opacity:0;transition:opacity var(--transition);}
+    .gallery-item:hover::after{opacity:1;}
+
+    /* ── TESTIMONIALS ── */
+    #testimonials{background:var(--bg);}
+    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem;}
+    .testi-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem;position:relative;transition:transform var(--transition),box-shadow var(--transition);}
+    .testi-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
+    .testi-card::before{content:'"';position:absolute;top:0.8rem;right:1.2rem;font-family:var(--font-head);font-size:5rem;font-weight:900;color:var(--red);opacity:0.12;line-height:1;}
+    .testi-stars{color:var(--yellow);font-size:1rem;margin-bottom:0.7rem;}
+    .testi-text{font-size:0.9rem;color:var(--gray);line-height:1.7;margin-bottom:1rem;font-style:italic;}
+    .testi-author{display:flex;align-items:center;gap:0.7rem;}
+    .testi-avatar{width:40px;height:40px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#fff;font-family:var(--font-head);font-weight:900;}
+    .testi-name{font-family:var(--font-head);font-size:0.95rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text);}
+    .testi-source{font-size:0.72rem;color:var(--gray);}
+
+    /* ── CONTACT ── */
+    #contact{background:var(--surface);}
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:2rem;}
+    .form-group{margin-bottom:1.1rem;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+    .form-group label{display:block;font-family:var(--font-head);font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text);margin-bottom:5px;}
+    .form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 14px;background:var(--bg);border:2px solid var(--border);border-radius:var(--radius);font-family:var(--font-body);font-size:0.95rem;color:var(--text);outline:none;transition:border-color var(--transition);}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--red);}
+    .form-group textarea{resize:vertical;min-height:90px;}
+    .form-submit{width:100%;padding:14px;background:var(--red);color:#fff;font-family:var(--font-head);font-size:1.05rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;border-radius:var(--radius);transition:all var(--transition);}
+    .form-submit:hover{background:var(--red-dark);transform:translateY(-2px);}
+    .info-block{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;margin-bottom:1rem;}
+    .info-block h3{font-family:var(--font-head);font-size:1rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--red);margin-bottom:0.6rem;}
+    .info-line{display:flex;gap:0.5rem;align-items:flex-start;margin-bottom:4px;}
+    .info-text{font-size:0.87rem;color:var(--gray);line-height:1.5;}
+    .hours-table{width:100%;font-size:0.87rem;}
+    .hours-table tr{border-bottom:1px solid var(--border);}
+    .hours-table td{padding:5px 0;color:var(--gray);}
+    .hours-table td:last-child{text-align:right;font-weight:600;color:var(--text);}
+    .map-wrapper{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);margin-top:0.8rem;}
+    .map-wrapper iframe{width:100%;height:210px;border:none;display:block;}
+
+    /* ── NEWSLETTER ── */
+    #newsletter{background:var(--red);padding:5rem 2rem;text-align:center;}
+    .newsletter-inner{max-width:560px;margin:0 auto;}
+    .newsletter-inner h2{font-family:var(--font-head);font-size:clamp(2rem,4vw,3rem);font-weight:900;text-transform:uppercase;color:#fff;margin-bottom:0.5rem;}
+    .newsletter-inner p{color:rgba(255,255,255,0.75);margin-bottom:1.5rem;}
+    .newsletter-form{display:flex;max-width:440px;margin:0 auto;}
+    .newsletter-form input{flex:1;padding:13px 16px;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.3);border-right:none;border-radius:var(--radius) 0 0 var(--radius);color:#fff;font-family:var(--font-body);outline:none;}
+    .newsletter-form input::placeholder{color:rgba(255,255,255,0.55);}
+    .newsletter-form button{padding:13px 20px;background:var(--black);color:#fff;font-family:var(--font-head);font-size:0.9rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;border-radius:0 var(--radius) var(--radius) 0;transition:background var(--transition);}
+    .newsletter-form button:hover{background:#333;}
+
+    /* ── FOOTER ── */
+    footer{background:var(--black);color:rgba(255,255,255,0.6);padding:4rem 2rem 1.5rem;}
+    .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem;}
+    .footer-brand .logo{font-family:var(--font-head);font-size:2.2rem;font-weight:900;letter-spacing:3px;color:#fff;margin-bottom:0.7rem;}
+    .footer-brand .logo span{color:var(--red);}
+    .footer-brand p{font-size:0.87rem;line-height:1.7;margin-bottom:1.2rem;color:rgba(255,255,255,0.45);}
+    .social-links{display:flex;gap:0.7rem;}
+    .social-link{width:34px;height:34px;background:rgba(255,255,255,0.08);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:all var(--transition);}
+    .social-link:hover{background:var(--red);}
+    .footer-col h4{font-family:var(--font-head);font-size:0.88rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#fff;margin-bottom:0.9rem;}
+    .footer-col a{display:block;margin-bottom:0.45rem;font-size:0.87rem;color:rgba(255,255,255,0.5);transition:color var(--transition);}
+    .footer-col a:hover{color:var(--red);}
+    .footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.08);padding-top:1.2rem;display:flex;justify-content:space-between;font-size:0.78rem;color:rgba(255,255,255,0.3);flex-wrap:wrap;gap:0.5rem;}
+    .footer-bottom a{color:var(--red);}
+
+    /* ── FLOAT CTA ── */
+    #float-cta{position:fixed;bottom:2rem;right:2rem;z-index:900;transition:opacity var(--transition),transform var(--transition);}
+    #float-cta.hidden{opacity:0;pointer-events:none;transform:translateY(20px);}
+    .float-btn{padding:13px 22px;background:var(--red);color:#fff;font-family:var(--font-head);font-size:0.95rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;border-radius:50px;display:flex;align-items:center;gap:8px;box-shadow:0 6px 24px rgba(214,40,40,0.45);transition:all var(--transition);}
+    .float-btn:hover{background:var(--red-dark);transform:scale(1.05);}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px){
+      .hero-content{grid-template-columns:1fr;text-align:center;}
+      .hero-sub{margin:0 auto 2rem;}
+      .hero-actions{justify-content:center;}
+      .hero-plate{width:260px;height:260px;}
+      .big-icon{font-size:6rem;}
+      .about-grid,.deal-inner,.contact-grid{grid-template-columns:1fr;}
+      .about-img{height:280px;font-size:6rem;}
+      .gallery-grid{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,160px);}
+      .gallery-item:nth-child(1){grid-column:span 2;grid-row:span 1;font-size:5rem;}
+      .footer-grid{grid-template-columns:1fr 1fr;}
+      .stats-inner{grid-template-columns:repeat(2,1fr);}
+      .testi-grid{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:768px){
+      .nav-links,.nav-order-btn{display:none;}
+      .nav-hamburger{display:flex;}
+      section{padding:4rem 1.5rem;}
+      .menu-panel.active{grid-template-columns:1fr;}
+      .testi-grid{grid-template-columns:1fr;}
+      .footer-grid{grid-template-columns:1fr;}
+      .form-row{grid-template-columns:1fr;}
+      .about-features{grid-template-columns:1fr;}
+      .newsletter-form{flex-direction:column;gap:0.5rem;}
+      .newsletter-form input{border-right:2px solid rgba(255,255,255,0.3);border-radius:var(--radius);}
+      .newsletter-form button{border-radius:var(--radius);}
+      .deal-cards{grid-template-columns:1fr 1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="loader-pizza">🍕</div>
+  <div class="loader-text">FU<span>O</span>CO</div>
+</div>
+
+<nav id="navbar">
+  <div class="nav-logo">FU<span>O</span>CO</div>
+  <ul class="nav-links">
+    <li><a href="#about" data-i18n="nav_about">Storia</a></li>
+    <li><a href="#menu" data-i18n="nav_menu">Menù</a></li>
+    <li><a href="#deal" data-i18n="nav_deals">Offerte</a></li>
+    <li><a href="#gallery" data-i18n="nav_gallery">Galleria</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Contatti</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="it">IT</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+    <button class="dark-toggle" id="darkToggle">🌙</button>
+    <a href="#contact" class="nav-order-btn" data-i18n="nav_order">Ordina Ora</a>
+  </div>
+  <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#about" data-i18n="nav_about" onclick="this.closest('.mobile-nav').classList.remove('open')">Storia</a>
+  <a href="#menu" data-i18n="nav_menu" onclick="this.closest('.mobile-nav').classList.remove('open')">Menù</a>
+  <a href="#deal" data-i18n="nav_deals" onclick="this.closest('.mobile-nav').classList.remove('open')">Offerte</a>
+  <a href="#gallery" data-i18n="nav_gallery" onclick="this.closest('.mobile-nav').classList.remove('open')">Galleria</a>
+  <a href="#contact" data-i18n="nav_contact" onclick="this.closest('.mobile-nav').classList.remove('open')">Contatti</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-stripes"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <span class="hero-badge" data-i18n="hero_badge">#1 Pizza al Taglio a Roma</span>
+      <h1 class="hero-h1">
+        <span class="r" data-i18n="h1_1">PIZZA.</span><br>
+        <span class="y" data-i18n="h1_2">FUOCO.</span><br>
+        <span class="g" data-i18n="h1_3">PASSIONE.</span>
+      </h1>
+      <p class="hero-sub" data-i18n="hero_sub">Pizza al taglio croccante, supplì dorati e street food romano autentico — direttamente dal cuore di Roma con amore e tanto calore.</p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn-primary" data-i18n="hero_cta1">🍕 Vedi il Menù</a>
+        <a href="#contact" class="btn-outline" data-i18n="hero_cta2">Ordina Ora</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-plate"><div class="big-icon">🍕</div></div>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span data-i18n="scroll">Scorri</span></div>
+</section>
+
+<div id="stats">
+  <div class="stats-inner">
+    <div class="stat-item"><span class="stat-num">300+</span><span class="stat-label" data-i18n="stat1">Pizze al Giorno</span></div>
+    <div class="stat-item"><span class="stat-num">4.9★</span><span class="stat-label" data-i18n="stat2">Rating Google</span></div>
+    <div class="stat-item"><span class="stat-num">72h</span><span class="stat-label" data-i18n="stat3">Lievitazione</span></div>
+    <div class="stat-item"><span class="stat-num">2012</span><span class="stat-label" data-i18n="stat4">Dal</span></div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-img">🍕
+          <div class="about-badge"><span class="big">12</span><span class="small" data-i18n="badge_years">Anni</span></div>
+        </div>
+      </div>
+      <div class="about-content reveal">
+        <span class="section-tag" data-i18n="about_tag">La Nostra Storia</span>
+        <h2 class="section-title" data-i18n="about_title">NATI PER IL<br>FUOCO.</h2>
+        <p class="section-sub" data-i18n="about_p1">FUOCO nasce da una certezza: la pizza al taglio romana, quella vera, non ha rivali. Impasto con 72 ore di lievitazione, ingredienti DOP e un forno a legna che brucia tutto il giorno.</p>
+        <p class="section-sub" style="margin-top:0.8rem;" data-i18n="about_p2">Dal nostro banco escono pezzi di pizza che profumano di Roma — croccanti fuori, alveolati dentro, con i topping più freschi che il mercato offre ogni mattina.</p>
+        <div class="about-features">
+          <div class="about-feature"><div class="feat-icon">🔥</div><div class="feat-text"><h4 data-i18n="f1t">Forno a Legna</h4><p data-i18n="f1d">450°C di temperatura per una cottura perfetta in 90 secondi.</p></div></div>
+          <div class="about-feature"><div class="feat-icon">🌾</div><div class="feat-text"><h4 data-i18n="f2t">72h di Lievitazione</h4><p data-i18n="f2d">Impasto ad alta idratazione, più digeribile e profumato.</p></div></div>
+          <div class="about-feature"><div class="feat-icon">🍅</div><div class="feat-text"><h4 data-i18n="f3t">Pomodoro San Marzano</h4><p data-i18n="f3d">DOP, raccolto a mano, senza additivi. Solo il meglio della Campania.</p></div></div>
+          <div class="about-feature"><div class="feat-icon">⚡</div><div class="feat-text"><h4 data-i18n="f4t">Servizio Veloce</h4><p data-i18n="f4d">Al banco in meno di 2 minuti. Il vero street food romano.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="section-inner">
+    <span class="section-tag reveal" data-i18n="menu_tag">Cosa Facciamo</span>
+    <h2 class="section-title reveal" data-i18n="menu_title">IL MENÙ.</h2>
+    <p class="section-sub reveal" data-i18n="menu_sub">Pizza al taglio, supplì, fritti romani e dolci della tradizione — tutto quello che ami di Roma, in un boccone.</p>
+    <div class="menu-tabs">
+      <button class="menu-tab active" data-tab="pizza" data-i18n="tab1">Pizza</button>
+      <button class="menu-tab" data-tab="fritti" data-i18n="tab2">Fritti</button>
+      <button class="menu-tab" data-tab="dolci" data-i18n="tab3">Dolci</button>
+      <button class="menu-tab" data-tab="bibite" data-i18n="tab4">Bibite</button>
+    </div>
+
+    <div class="menu-panel active" id="tab-pizza">
+      <div class="menu-card reveal"><div class="menu-card-img">🍕<span class="menu-bestseller" data-i18n="best">Bestseller</span></div><div class="menu-card-body"><div class="menu-card-name" data-i18n="p1n">MARGHERITA</div><p class="menu-card-desc" data-i18n="p1d">Pomodoro San Marzano DOP, fior di latte di Agerola, basilico fresco.</p><div class="menu-card-footer"><span class="menu-price">3,50 € / etto</span><button class="menu-add">+</button></div></div></div>
+      <div class="menu-card reveal"><div class="menu-card-img">🧀</div><div class="menu-card-body"><div class="menu-card-name" data-i18n="p2n">QUATTRO FORMAGGI</div><p class="menu-card-desc" data-i18n="p2d">Mozzarella, gorgonzola, pecorino romano, parmigiano 24 mesi e noci.</p><div class="menu-card-footer"><span class="menu-price">4,50 € / etto</span><button class="menu-add">+</button></div></div></div>
+      <div class="menu-card reveal"><div class="menu-card-img">🥩</div><div class="menu-card-body"><div class="menu-card-name" data-i18n="p3n">PATATE & SALSICCIA</div><p class="menu-card-desc" data-i18n="p3d">Patate arrosto, salsiccia di maiale, rosmarino e mozzarella filante.</p><div class="menu-card-footer"><span class="menu-price">4,20 € / etto</span><button class="menu-add">+</button></div></div></div>
+      <div class="menu-card reveal"><div class="menu-card-img">🌿</div><div class="menu-card-body"><div class="menu-card-name" data-i18n="p4n">ZUCCHINE & BURRATA</div><p class="menu-card-desc" data-i18n="p4d">Zucchine grigliate, crema di burrata, menta fresca e olio EVO.</p><div class="menu-card-footer"><span class="menu-price">4,80 € / etto</span><button class="menu-add">+</button></div></div></div>
+      <div class="menu-card reveal"><div class="menu-card-img">🔴</div><div class="menu-card-body"><div class="menu-card-name" data-i18n="p5n">DIAVOLA PICCANTE</div><p class="menu-card-desc" data-i18n="p5d">Salame piccante, 'nduja calabrese, mozzarella e peperoncino.</p><div class="menu-card-footer"><span class="menu-price">4,20 € / etto</span><button class="menu-add">+</button></div></div></div>
+      <div class="menu-card reveal"><div class="menu-card-img">🍄</div><div class="menu-card-body"><div class="menu-card-name" data-i18n="p6n">FUNGHI & TARTUFO</div><p class="menu-card-desc" data-i18n="p6d">Funghi porcini, crema di tartufo nero, mozzarella e prezzemolo.</p><div class="menu-card-footer"><span class="menu-price">5,50 € / etto</span><button class="menu-add">+</button></div></div></div>
+    </div>
+
+    <div class="menu-panel" id="tab-fritti">
+      <div class="menu-card reveal"><div class="menu-card-img">🟡<span class="menu-bestseller" data-i18n="best">Bestseller</span></div><div class="menu-card-body"><div class="menu-card-name" data-i18n="fr1n">SUPPLÌ AL TELEFONO</div><p class="menu-card-desc" data-i18n="fr1d">Riso al pomodoro, ripieno di mozzarella filante, fritto croccante. Il classico di Roma.</p><div class="menu-card-footer"><span class="menu-price">2,50 €</span><button class="menu-add">+</button></div></div></div>
+      <div class="menu-card reveal"><div class="menu-card-img">🟤</div><div class="menu-card-body"><div class="menu-card-name" data-i18n="fr2n">FIORI DI ZUCCA</div><p class="menu-card-desc" data-i18n="fr2d">Fiori di zucca ripieni di mozzarella e alice, in pastella croccante.</p><div class="menu-card-footer"><span class="menu-price">2,00 €</span><button class="menu-add">+</button></div></div></div>
+      <div class="menu-card reveal"><div class="menu-card-img">⚪</div><div class="menu-card-body"><div class="menu-card-name" data-i18n="fr3n">BACCALÀ FRITTO</div><p class="menu-card-desc" data-i18n="fr3d">Filetto di baccalà in pastella di birra, croccante fuori e morbido dentro.</p><div class="menu-card-footer"><span class="menu-price">4,50 €</span><button class="menu-add">+</button></div></div></div>
+    </div>
+
+    <div class="menu-panel" id="tab-dolci">
+      <div class="menu-card reveal"><div class="menu-card-img">🍮</div><div class="menu-card-body"><div class="menu-card-name" data-i18n="d1n">TIRAMISÙ</div><p class="menu-card-desc" data-i18n="d1d">Tiramisù della casa — ricetta tradizionale, mascarpone fresco, savoiardi e cacao.</p><div class="menu-card-footer"><span class="menu-price">4,50 €</span><button class="menu-add">+</button></div></div></div>
+      <div class="menu-card reveal"><div class="menu-card-img">🍩</div><div class="menu-card-body"><div class="menu-card-name" data-i18n="d2n">MARITOZZO</div><p class="menu-card-desc" data-i18n="d2d">Il dolce simbolo di Roma — brioche soffice farcita di panna fresca montata.</p><div class="menu-card-footer"><span class="menu-price">3,00 €</span><button class="menu-add">+</button></div></div></div>
+    </div>
+
+    <div class="menu-panel" id="tab-bibite">
+      <div class="menu-card reveal"><div class="menu-card-img">🥤</div><div class="menu-card-body"><div class="menu-card-name" data-i18n="b1n">BIBITE</div><p class="menu-card-desc" data-i18n="b1d">Cola, Fanta, Sprite — lattina o 0,5L in bottiglia ghiacciata.</p><div class="menu-card-footer"><span class="menu-price">2,00 €</span><button class="menu-add">+</button></div></div></div>
+      <div class="menu-card reveal"><div class="menu-card-img">🍺</div><div class="menu-card-body"><div class="menu-card-name" data-i18n="b2n">BIRRA ARTIGIANALE</div><p class="menu-card-desc" data-i18n="b2d">Birra romana artigianale alla spina — fresca, locale, buonissima.</p><div class="menu-card-footer"><span class="menu-price">4,00 €</span><button class="menu-add">+</button></div></div></div>
+      <div class="menu-card reveal"><div class="menu-card-img">☕</div><div class="menu-card-body"><div class="menu-card-name" data-i18n="b3n">CAFFÈ</div><p class="menu-card-desc" data-i18n="b3d">Espresso o caffè americano — la pausa giusta dopo una buona pizza.</p><div class="menu-card-footer"><span class="menu-price">1,20 €</span><button class="menu-add">+</button></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="deal">
+  <div class="deal-bg-text" data-i18n="deal_bg">OFFERTE</div>
+  <div class="deal-inner">
+    <div class="deal-content reveal">
+      <span class="deal-tag" data-i18n="deal_tag">Questa Settimana</span>
+      <h2 class="deal-title" data-i18n="deal_title">LE NOSTRE<br><em>OFFERTE.</em></h2>
+      <p class="deal-desc" data-i18n="deal_desc">Ogni giorno un'offerta diversa. Seguici su Instagram per non perderne nessuna — o passa direttamente al banco per la promozione del giorno.</p>
+      <a href="#contact" class="deal-btn" data-i18n="deal_cta">Vedi Tutte le Offerte →</a>
+    </div>
+    <div class="deal-cards reveal">
+      <div class="deal-card"><div class="deal-card-icon">🍕</div><div class="deal-card-name" data-i18n="dc1">Lunedì</div><div class="deal-card-price">-20%</div><div class="deal-card-old" data-i18n="dc1s">sulla pizza</div></div>
+      <div class="deal-card"><div class="deal-card-icon">🟡</div><div class="deal-card-name" data-i18n="dc2">Pizza + Supplì</div><div class="deal-card-price">8,50 €</div><div class="deal-card-old">10,50 €</div></div>
+      <div class="deal-card"><div class="deal-card-icon">👥</div><div class="deal-card-name" data-i18n="dc3">Per Due</div><div class="deal-card-price">15,00 €</div><div class="deal-card-old">19,00 €</div></div>
+      <div class="deal-card"><div class="deal-card-icon">🎓</div><div class="deal-card-name" data-i18n="dc4">Studenti</div><div class="deal-card-price">-15%</div><div class="deal-card-old" data-i18n="dc4s">con tessera</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="section-inner">
+    <span class="section-tag reveal" data-i18n="gal_tag">Foto</span>
+    <h2 class="section-title reveal" data-i18n="gal_title">FOOD PORN ROMANO.</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal">🍕</div>
+      <div class="gallery-item reveal">🟡</div>
+      <div class="gallery-item reveal">🧀</div>
+      <div class="gallery-item reveal">🔥</div>
+      <div class="gallery-item reveal">🍅</div>
+      <div class="gallery-item reveal">🍺</div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="section-inner">
+    <span class="section-tag reveal" data-i18n="testi_tag">Recensioni</span>
+    <h2 class="section-title reveal" data-i18n="testi_title">ROMA AMA FUOCO.</h2>
+    <div class="testi-grid">
+      <div class="testi-card reveal"><div class="testi-stars">★★★★★</div><p class="testi-text" data-i18n="t1">"La migliore pizza al taglio di Roma — e ne ho mangiate tante. L'impasto è leggero e croccante, i topping freschi. Ci vengo ogni venerdì."</p><div class="testi-author"><div class="testi-avatar">M</div><div><div class="testi-name">Marco B.</div><div class="testi-source">Google Review</div></div></div></div>
+      <div class="testi-card reveal"><div class="testi-stars">★★★★★</div><p class="testi-text" data-i18n="t2">"Il supplì qui è un'altra dimensione. Croccante, filante, perfetto. Veloce, buono e a prezzi onesti. Il vero street food romano."</p><div class="testi-author"><div class="testi-avatar">C</div><div><div class="testi-name">Chiara R.</div><div class="testi-source">Google Review</div></div></div></div>
+      <div class="testi-card reveal"><div class="testi-stars">★★★★★</div><p class="testi-text" data-i18n="t3">"Ho provato la pizza ai funghi e tartufo e non torno più indietro. Un livello altissimo per uno street food. FUOCO è il meglio di Roma."</p><div class="testi-author"><div class="testi-avatar">A</div><div><div class="testi-name">Andrea M.</div><div class="testi-source">Google Review</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-inner">
+    <span class="section-tag reveal" data-i18n="contact_tag">Vieni a Trovarci</span>
+    <h2 class="section-title reveal" data-i18n="contact_title">PASSA DA NOI.</h2>
+    <div class="contact-grid">
+      <div class="contact-form reveal">
+        <h3 style="font-family:var(--font-head);font-size:1.3rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.2rem;" data-i18n="form_title">Prenotazione Tavolo</h3>
+        <div class="form-row">
+          <div class="form-group"><label data-i18n="fn">Nome</label><input type="text" placeholder="Mario Rossi"/></div>
+          <div class="form-group"><label data-i18n="fp">Telefono</label><input type="tel" placeholder="+39 06 ..."/></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label data-i18n="fd">Data</label><input type="date"/></div>
+          <div class="form-group"><label data-i18n="fg">Persone</label><select><option>1</option><option>2</option><option>3–4</option><option>5–8</option><option>8+</option></select></div>
+        </div>
+        <div class="form-group"><label data-i18n="fnote">Note</label><textarea data-i18n-ph="fnote_ph" placeholder="Allergie, occasioni speciali, etc."></textarea></div>
+        <button class="form-submit" data-i18n="fsub">Prenota Ora →</button>
+      </div>
+      <div class="contact-info reveal">
+        <div class="info-block">
+          <h3 data-i18n="info_w">Dove Siamo</h3>
+          <div class="info-line"><span>📍</span><span class="info-text">Via del Corso 88, 00186 Roma</span></div>
+          <div class="info-line"><span>📞</span><span class="info-text">+39 06 456 789 10</span></div>
+          <div class="info-line"><span>✉️</span><span class="info-text">ciao@fuoco-roma.it</span></div>
+        </div>
+        <div class="info-block">
+          <h3 data-i18n="info_h">Orari</h3>
+          <table class="hours-table">
+            <tr><td data-i18n="d1">Lun – Ven</td><td>11:00 – 22:00</td></tr>
+            <tr><td data-i18n="d2">Sabato</td><td>11:00 – 23:00</td></tr>
+            <tr><td data-i18n="d3">Domenica</td><td>12:00 – 21:00</td></tr>
+          </table>
+        </div>
+        <div class="map-wrapper">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.3!2d12.4833!3d41.9028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f6196f9928edd%3A0xb90f770693656e38!2sRoma!5e0!3m2!1sit!2sit!4v1711000000000!5m2!1sit!2sit" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="newsletter">
+  <div class="newsletter-inner reveal">
+    <h2 data-i18n="nl_t">NESSUNA OFFERTA PERSA.</h2>
+    <p data-i18n="nl_s">Iscriviti e ricevi le offerte settimanali, nuove pizze e sconti esclusivi direttamente nella tua inbox.</p>
+    <div class="newsletter-form">
+      <input type="email" data-i18n-ph="nl_ph" placeholder="tua@email.it"/>
+      <button data-i18n="nl_b">Iscriviti</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">FU<span>O</span>CO</div>
+      <p data-i18n="ft_desc">La migliore pizza al taglio di Roma — croccante, buona, veloce. Dal 2012.</p>
+      <div class="social-links">
+        <a href="#" class="social-link">📸</a>
+        <a href="#" class="social-link">🎵</a>
+        <a href="#" class="social-link">👤</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="ft_nav">Navigazione</h4>
+      <a href="#about" data-i18n="nav_about">Storia</a>
+      <a href="#menu" data-i18n="nav_menu">Menù</a>
+      <a href="#deal" data-i18n="nav_deals">Offerte</a>
+      <a href="#gallery" data-i18n="nav_gallery">Galleria</a>
+      <a href="#contact" data-i18n="nav_contact">Contatti</a>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="ft_pop">Popolari</h4>
+      <a href="#menu">Margherita</a>
+      <a href="#menu">Supplì al Telefono</a>
+      <a href="#menu">Quattro Formaggi</a>
+      <a href="#menu">Maritozzo</a>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="ft_leg">Legale</h4>
+      <a href="#" data-i18n="ft_priv">Privacy Policy</a>
+      <a href="#" data-i18n="ft_cook">Cookie</a>
+      <a href="#" data-i18n="ft_note">Note Legali</a>
+      <a href="#" data-i18n="ft_all">Allergeni</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 FUOCO Roma. <span data-i18n="ft_rights">Tutti i diritti riservati.</span> · Template by <a href="mailto:vinayakganiger445@gmail.com">Vinayak Ganiger</a> · <a href="https://wa.me/4916364141​97?text=Hi%2C%20I%27m%20interested%20in%20a%20website%20for%20my%20restaurant" target="_blank">💬 WhatsApp</a></span>
+    <span data-i18n="ft_made">Fatto con 🔥 a Roma</span>
+  </div>
+</footer>
+
+<div id="float-cta">
+  <a href="#contact" class="float-btn">🍕 <span data-i18n="float">Ordina Ora</span></a>
+</div>
+
+<script>
+const translations = {
+  it:{
+    nav_about:"Storia",nav_menu:"Menù",nav_deals:"Offerte",nav_gallery:"Galleria",nav_contact:"Contatti",nav_order:"Ordina Ora",
+    hero_badge:"#1 Pizza al Taglio a Roma",h1_1:"PIZZA.",h1_2:"FUOCO.",h1_3:"PASSIONE.",
+    hero_sub:"Pizza al taglio croccante, supplì dorati e street food romano autentico — direttamente dal cuore di Roma con amore e tanto calore.",
+    hero_cta1:"🍕 Vedi il Menù",hero_cta2:"Ordina Ora",scroll:"Scorri",
+    stat1:"Pizze al Giorno",stat2:"Rating Google",stat3:"Lievitazione",stat4:"Dal",
+    badge_years:"Anni",about_tag:"La Nostra Storia",about_title:"NATI PER IL\nFUOCO.",
+    about_p1:"FUOCO nasce da una certezza: la pizza al taglio romana, quella vera, non ha rivali. Impasto con 72 ore di lievitazione, ingredienti DOP e un forno a legna che brucia tutto il giorno.",
+    about_p2:"Dal nostro banco escono pezzi di pizza che profumano di Roma — croccanti fuori, alveolati dentro, con i topping più freschi che il mercato offre ogni mattina.",
+    f1t:"Forno a Legna",f1d:"450°C di temperatura per una cottura perfetta in 90 secondi.",
+    f2t:"72h di Lievitazione",f2d:"Impasto ad alta idratazione, più digeribile e profumato.",
+    f3t:"Pomodoro San Marzano",f3d:"DOP, raccolto a mano, senza additivi. Solo il meglio della Campania.",
+    f4t:"Servizio Veloce",f4d:"Al banco in meno di 2 minuti. Il vero street food romano.",
+    menu_tag:"Cosa Facciamo",menu_title:"IL MENÙ.",menu_sub:"Pizza al taglio, supplì, fritti romani e dolci della tradizione — tutto quello che ami di Roma, in un boccone.",
+    tab1:"Pizza",tab2:"Fritti",tab3:"Dolci",tab4:"Bibite",best:"Bestseller",
+    p1n:"MARGHERITA",p1d:"Pomodoro San Marzano DOP, fior di latte di Agerola, basilico fresco.",
+    p2n:"QUATTRO FORMAGGI",p2d:"Mozzarella, gorgonzola, pecorino romano, parmigiano 24 mesi e noci.",
+    p3n:"PATATE & SALSICCIA",p3d:"Patate arrosto, salsiccia di maiale, rosmarino e mozzarella filante.",
+    p4n:"ZUCCHINE & BURRATA",p4d:"Zucchine grigliate, crema di burrata, menta fresca e olio EVO.",
+    p5n:"DIAVOLA PICCANTE",p5d:"Salame piccante, 'nduja calabrese, mozzarella e peperoncino.",
+    p6n:"FUNGHI & TARTUFO",p6d:"Funghi porcini, crema di tartufo nero, mozzarella e prezzemolo.",
+    fr1n:"SUPPLÌ AL TELEFONO",fr1d:"Riso al pomodoro, ripieno di mozzarella filante, fritto croccante. Il classico di Roma.",
+    fr2n:"FIORI DI ZUCCA",fr2d:"Fiori di zucca ripieni di mozzarella e alice, in pastella croccante.",
+    fr3n:"BACCALÀ FRITTO",fr3d:"Filetto di baccalà in pastella di birra, croccante fuori e morbido dentro.",
+    d1n:"TIRAMISÙ",d1d:"Tiramisù della casa — ricetta tradizionale, mascarpone fresco, savoiardi e cacao.",
+    d2n:"MARITOZZO",d2d:"Il dolce simbolo di Roma — brioche soffice farcita di panna fresca montata.",
+    b1n:"BIBITE",b1d:"Cola, Fanta, Sprite — lattina o 0,5L in bottiglia ghiacciata.",
+    b2n:"BIRRA ARTIGIANALE",b2d:"Birra romana artigianale alla spina — fresca, locale, buonissima.",
+    b3n:"CAFFÈ",b3d:"Espresso o caffè americano — la pausa giusta dopo una buona pizza.",
+    deal_bg:"OFFERTE",deal_tag:"Questa Settimana",deal_title:"LE NOSTRE\nOFFERTE.",
+    deal_desc:"Ogni giorno un'offerta diversa. Seguici su Instagram per non perderne nessuna — o passa direttamente al banco per la promozione del giorno.",
+    deal_cta:"Vedi Tutte le Offerte →",
+    dc1:"Lunedì",dc1s:"sulla pizza",dc2:"Pizza + Supplì",dc3:"Per Due",dc4:"Studenti",dc4s:"con tessera",
+    gal_tag:"Foto",gal_title:"FOOD PORN ROMANO.",
+    testi_tag:"Recensioni",testi_title:"ROMA AMA FUOCO.",
+    t1:"\"La migliore pizza al taglio di Roma — e ne ho mangiate tante. L'impasto è leggero e croccante, i topping freschi. Ci vengo ogni venerdì.\"",
+    t2:"\"Il supplì qui è un'altra dimensione. Croccante, filante, perfetto. Veloce, buono e a prezzi onesti. Il vero street food romano.\"",
+    t3:"\"Ho provato la pizza ai funghi e tartufo e non torno più indietro. Un livello altissimo per uno street food. FUOCO è il meglio di Roma.\"",
+    contact_tag:"Vieni a Trovarci",contact_title:"PASSA DA NOI.",form_title:"Prenotazione Tavolo",
+    fn:"Nome",fp:"Telefono",fd:"Data",fg:"Persone",fnote:"Note",fnote_ph:"Allergie, occasioni speciali, etc.",fsub:"Prenota Ora →",
+    info_w:"Dove Siamo",info_h:"Orari",d1:"Lun – Ven",d2:"Sabato",d3:"Domenica",
+    nl_t:"NESSUNA OFFERTA PERSA.",nl_s:"Iscriviti e ricevi le offerte settimanali, nuove pizze e sconti esclusivi.",nl_ph:"tua@email.it",nl_b:"Iscriviti",
+    ft_desc:"La migliore pizza al taglio di Roma — croccante, buona, veloce. Dal 2012.",
+    ft_nav:"Navigazione",ft_pop:"Popolari",ft_leg:"Legale",
+    ft_priv:"Privacy Policy",ft_cook:"Cookie",ft_note:"Note Legali",ft_all:"Allergeni",
+    ft_rights:"Tutti i diritti riservati.",ft_made:"Fatto con 🔥 a Roma",float:"Ordina Ora",
+  },
+  en:{
+    nav_about:"Story",nav_menu:"Menu",nav_deals:"Deals",nav_gallery:"Gallery",nav_contact:"Contact",nav_order:"Order Now",
+    hero_badge:"#1 Pizza al Taglio in Rome",h1_1:"PIZZA.",h1_2:"FIRE.",h1_3:"PASSION.",
+    hero_sub:"Crispy Roman pizza al taglio, golden supplì and authentic Roman street food — straight from the heart of Rome with love and a whole lot of fire.",
+    hero_cta1:"🍕 View Menu",hero_cta2:"Order Now",scroll:"Scroll",
+    stat1:"Pizzas per Day",stat2:"Google Rating",stat3:"Fermentation",stat4:"Since",
+    badge_years:"Years",about_tag:"Our Story",about_title:"BORN FOR\nFIRE.",
+    about_p1:"FUOCO was born from one certainty: authentic Roman pizza al taglio has no rivals. 72-hour fermented dough, DOP ingredients and a wood-fired oven burning all day long.",
+    about_p2:"From our counter come slices that smell like Rome — crispy outside, airy inside, with the freshest toppings the market offers every morning.",
+    f1t:"Wood-fired Oven",f1d:"450°C for a perfect bake in 90 seconds.",
+    f2t:"72h Fermentation",f2d:"High-hydration dough — more digestible and aromatic.",
+    f3t:"San Marzano Tomato",f3d:"DOP, hand-harvested, no additives. Only the finest from Campania.",
+    f4t:"Ultra-fast Service",f4d:"At the counter in under 2 minutes. True Roman street food.",
+    menu_tag:"What We Do",menu_title:"THE MENU.",menu_sub:"Pizza al taglio, supplì, Roman fried food and traditional desserts — everything you love about Rome, in one bite.",
+    tab1:"Pizza",tab2:"Fried",tab3:"Desserts",tab4:"Drinks",best:"Bestseller",
+    p1n:"MARGHERITA",p1d:"San Marzano DOP tomato, Agerola fior di latte, fresh basil.",
+    p2n:"FOUR CHEESES",p2d:"Mozzarella, gorgonzola, Pecorino Romano, 24-month Parmigiano and walnuts.",
+    p3n:"POTATO & SAUSAGE",p3d:"Roasted potatoes, pork sausage, rosemary and stretchy mozzarella.",
+    p4n:"COURGETTE & BURRATA",p4d:"Grilled courgette, burrata cream, fresh mint and EVO oil.",
+    p5n:"SPICY DIAVOLA",p5d:"Spicy salami, Calabrian 'nduja, mozzarella and chilli.",
+    p6n:"MUSHROOM & TRUFFLE",p6d:"Porcini mushrooms, black truffle cream, mozzarella and parsley.",
+    fr1n:"SUPPLÌ AL TELEFONO",fr1d:"Tomato rice, stretchy mozzarella filling, crispy fried. Rome's greatest classic.",
+    fr2n:"COURGETTE FLOWERS",fr2d:"Courgette flowers filled with mozzarella and anchovy, in crispy batter.",
+    fr3n:"FRIED SALT COD",fr3d:"Salt cod fillet in beer batter, crispy outside and soft inside.",
+    d1n:"TIRAMISÙ",d1d:"House tiramisù — traditional recipe, fresh mascarpone, ladyfingers and cocoa.",
+    d2n:"MARITOZZO",d2d:"Rome's iconic sweet bun — soft brioche filled with freshly whipped cream.",
+    b1n:"SOFT DRINKS",b1d:"Cola, Fanta, Sprite — can or 0.5L chilled bottle.",
+    b2n:"CRAFT BEER",b2d:"Local Roman craft beer on tap — fresh, local, delicious.",
+    b3n:"COFFEE",b3d:"Espresso or Americano — the perfect break after great pizza.",
+    deal_bg:"DEALS",deal_tag:"This Week",deal_title:"OUR WEEKLY\nDEALS.",
+    deal_desc:"A different deal every day. Follow us on Instagram to never miss one — or just walk in for the daily special.",
+    deal_cta:"See All Deals →",
+    dc1:"Monday",dc1s:"on pizza",dc2:"Pizza + Supplì",dc3:"For Two",dc4:"Students",dc4s:"with valid ID",
+    gal_tag:"Photos",gal_title:"ROMAN FOOD PORN.",
+    testi_tag:"Reviews",testi_title:"ROME LOVES FUOCO.",
+    t1:"\"The best pizza al taglio in Rome — and I've eaten a lot of it. Light, crispy dough, fresh toppings. I come every Friday.\"",
+    t2:"\"The supplì here is on another level. Crispy, stretchy, perfect. Fast, delicious and honest prices. True Roman street food.\"",
+    t3:"\"I tried the mushroom and truffle pizza and I'm never going back. Such high quality for street food. FUOCO is the best in Rome.\"",
+    contact_tag:"Come Visit Us",contact_title:"COME ON IN.",form_title:"Table Reservation",
+    fn:"Name",fp:"Phone",fd:"Date",fg:"Guests",fnote:"Notes",fnote_ph:"Allergies, special occasions, etc.",fsub:"Reserve Now →",
+    info_w:"Location",info_h:"Opening Hours",d1:"Mon – Fri",d2:"Saturday",d3:"Sunday",
+    nl_t:"NEVER MISS A DEAL.",nl_s:"Subscribe and get weekly deals, new pizzas and exclusive discounts.",nl_ph:"your@email.com",nl_b:"Subscribe",
+    ft_desc:"Rome's best pizza al taglio — crispy, delicious, fast. Since 2012.",
+    ft_nav:"Navigation",ft_pop:"Popular",ft_leg:"Legal",
+    ft_priv:"Privacy Policy",ft_cook:"Cookie",ft_note:"Legal Notice",ft_all:"Allergens",
+    ft_rights:"All rights reserved.",ft_made:"Made with 🔥 in Rome",float:"Order Now",
+  }
+};
+
+let currentLang = localStorage.getItem('fuocoLang') || 'it';
+function applyLang(lang) {
+  currentLang = lang; localStorage.setItem('fuocoLang', lang); document.documentElement.lang = lang;
+  const t = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => { if(t[el.dataset.i18n]) el.textContent = t[el.dataset.i18n]; });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => { if(t[el.dataset.i18nPh]) el.placeholder = t[el.dataset.i18nPh]; });
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+}
+document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => applyLang(btn.dataset.lang)));
+
+const darkToggle = document.getElementById('darkToggle');
+if(localStorage.getItem('fuocoDark')==='true'){document.body.classList.add('dark-mode');darkToggle.textContent='☀️';}
+darkToggle.addEventListener('click',()=>{const d=document.body.classList.toggle('dark-mode');darkToggle.textContent=d?'☀️':'🌙';localStorage.setItem('fuocoDark',d);});
+
+window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loader').classList.add('hidden'),1600));
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>60));
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileNav').classList.toggle('open'));
+document.querySelectorAll('.menu-tab').forEach(tab=>{tab.addEventListener('click',()=>{document.querySelectorAll('.menu-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.menu-panel').forEach(p=>p.classList.remove('active'));tab.classList.add('active');document.getElementById('tab-'+tab.dataset.tab).classList.add('active');});});
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const floatObs=new IntersectionObserver(entries=>entries.forEach(e=>document.getElementById('float-cta').classList.toggle('hidden',e.isIntersecting)),{threshold:0.2});
+floatObs.observe(document.getElementById('contact'));
+applyLang(currentLang);
+</script>
+</body>
+</html>
