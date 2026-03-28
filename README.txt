@@ -2,13 +2,12 @@
   ITALIAN RESTAURANT WEBSITE BUNDLE — GUIDA / GUIDE
   3 Template HTML Professionali per Ristoranti
 ════════════════════════════════════════════════════════════════
+## Live-Vorschau
 
+- 🌸 [fiore-cafe](https://vinayak8484.github.io/Italian-restaurant-template/fiore-cafe.html)
+- 🖤 [oro-fine-dining](https://vinayak8484.github.io/Italian-restaurant-template/oro-fine-dining.html)
+- 🍔 [fuoco-street-food](https://vinayak8484.github.io/Italian-restaurant-template/fuoco-street-food.html)
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  🇮🇹  ITALIANO
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-BENVENUTO!
 
 Hai acquistato 3 template professionali per siti web di
 ristoranti, pronti all'uso. Ogni file HTML è completo e
@@ -18,17 +17,17 @@ autonomo — nessun framework, nessuna dipendenza esterna.
   COSA C'È NELLA CARTELLA
 ──────────────────────────────────────────────────────────────
 
-  🌸  fiore-cafe.html
+  🌸  fiore-cafe
       Design caldo e accogliente per caffè, brunch e bar.
       Tonalità terracotta, tipografia elegante, animazioni
       morbide. Menu: Colazione, Brunch, Caffetteria, Aperitivo.
 
-  🥇  oro-fine-dining.html
+  🥇  oro-fine-dining
       Estetica lusso e scura per ristoranti di alta cucina.
       Accenti dorati, atmosfera Michelin, menu degustazione.
       Perfetto per ristoranti gourmet e wine bar esclusivi.
 
-  🔥  fuoco-street-food.html
+  🔥  fuoco-street-food
       Design bold e dinamico per pizzerie, street food e
       locali fast casual. Colori tricolore italiano, carica
       ed energia. Menu: Pizza, Fritti, Dolci, Bibite.
