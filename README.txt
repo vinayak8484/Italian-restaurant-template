@@ -1,7 +1,6 @@
-════════════════════════════════════════════════════════════════
-  ITALIAN RESTAURANT WEBSITE BUNDLE — GUIDA / GUIDE
-  3 Template HTML Professionali per Ristoranti
-════════════════════════════════════════════════════════════════
+<!-- ⚠️ PREVIEW VERSION — NOT FOR COMMERCIAL USE
+     Full version: https://vinayakganiger.gumroad.com/l/uqkvd
+    
 ## Live-Vorschau
 
 - 🌸 [Fiore Caffè](https://vinayak8484.github.io/Italian-restaurant-template/fiore-cafe.html)
