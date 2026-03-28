@@ -4,10 +4,9 @@
 ════════════════════════════════════════════════════════════════
 ## Live-Vorschau
 
-- 🌸 [fiore-cafe](https://vinayak8484.github.io/Italian-restaurant-template/fiore-cafe.html)
-- 🖤 [oro-fine-dining](https://vinayak8484.github.io/Italian-restaurant-template/oro-fine-dining.html)
-- 🍔 [fuoco-street-food](https://vinayak8484.github.io/Italian-restaurant-template/fuoco-street-food.html)
-
+- 🌸 [Fiore Caffè](https://vinayak8484.github.io/Italian-restaurant-template/fiore-cafe.html)
+- 🖤 [Oro Fine Dining](https://vinayak8484.github.io/Italian-restaurant-template/oro-fine-dining.html)
+- 🍔 [Fuoco Street Food](https://vinayak8484.github.io/Italian-restaurant-template/fuoco-street-food.html)
 
 Hai acquistato 3 template professionali per siti web di
 ristoranti, pronti all'uso. Ogni file HTML è completo e
